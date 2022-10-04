@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Folha Automatizada</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="Horas.css">
+    </head>
+    <body>
+        <Container class="container">
+            <div class="folhaPonto">
+                <div class="container">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Mês de Referência</h4>
+                            </div>
+                            <select id="mes" class="form-control">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                                <option value="6">Julho</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Setembro</option>
+                                <option value="9">Outubro</option>
+                                <option value="10">Novembro</option>
+                                <option value="11">Dezembro</option>
+                            </select>
+                        </div>
+    
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Escala de Trabalho</h4>
+                            </div>
+                            <!-- <select id="horario"> -->
+                            <select id="horario" class="form-control">
+                                <option value="0">08:00 - 12:00 - 14:00 - 18:00</option>
+                                <option value="1">09:00 - 13:00 - 14:00 - 18:00</option>
+                                <option value="2">08:00 - 12:00 - 13:00 - 17:00</option>
+                            </select>
+                        </div>
+    
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Marque os Feriados:</h4>
+                            </div>
+                            <div id="feriados"></div>
+                        </div>
+                        <input value="Gerar Folha de Ponto" id="calcular" class="btn
+                            btn-primary" type="button">
+                    </div>
+                    <div id="ponto" class="col-md-8"></div>
+                    <button class="btn btn-primary" onclick="gerarPdf()">Gerar PDF</button>
+                </div>
+            </div>
+        </Container>
+
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="FormataData.js"></script>
+        <script src="horas.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"
+            integrity="sha512-6HmJ9Y5PZWQVCd4KUwIaSgtDskfsykB+Fvm8Nq98GVCMHstaVoX9jqDdwSyGCbmJy5eLs/DXgDE3SXRS+2B2yA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+
+        <script>
+        
+            function gerarPdf(){
+                
+                var doc = new jsPDF({               
+                    orientation: 'p',                     
+                    format: [612, 792]
+               });
+                
+                doc.fromHTML($('#ponto').html(), 10, 10, {
+                    'width' : 40,
+                        
+                });
+                
+                doc.save('Folha de ponto');
+            }
+        
+        </script>
+    </body>
+</html>
